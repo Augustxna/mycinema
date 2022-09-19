@@ -1,0 +1,317 @@
+<ion-content style="--background: #f5f5f5;">
+
+  <div *ngIf="user.role == 'admin'" style="position: relative; display: flex; justify-content: flex-start;">
+    <div (click)="signout()" style="position: absolute; bottom: 10px; right: 10px; cursor: pointer;">Sign Out</div>
+
+
+
+    <div
+      style="min-height: 100vh; display: flex; flex-direction: column; width:12%; min-width: 12%; align-items: center; padding: 20px 0; background: rgb(1, 5, 17); color: white;">
+      
+      <div style="width: 100%; border-bottom: 1px solid #FFFFFF;"></div>
+
+      <div style="cursor: pointer; padding:10px 0; font-size: 14px;" (click)="changetab('createmovie')">Create Movie
+      </div>
+
+      <div style="width: 100%; border-bottom: 1px solid #FFFFFF;"></div>
+
+      <div style="cursor: pointer; padding:10px 0; font-size: 14px;" (click)="changetab('showing')">View Showing
+      </div>
+
+      <div style="width: 100%; border-bottom: 1px solid #FFFFFF;"></div>
+
+      <div style="cursor: pointer; padding:10px 0; font-size: 14px;" (click)="changetab('booking')">View Booking
+      </div>
+
+      <div style="width: 100%; border-bottom: 1px solid #FFFFFF;"></div>
+
+    </div>
+
+
+    <div style="width: 88%; min-width: 88%; ">
+
+      <div *ngIf="tab == 'default' " style="background: white; width: 100%; height: 100%;"></div>
+
+      <div *ngIf="tab == 'createmovie'" style="background: #f5f5f5; width: 100%; height: 100%; position: relative;">
+
+        <div>
+
+          <div (click)="changetab('default')" style="position: absolute; top:10px; left:10px; cursor:pointer">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <div (click)="callmodal('createmovie')"
+            style="position: absolute; padding: 5px 10px; right: 15px; top: 15px; background: rgb(0, 119, 255); color: #FFFFFF; border-radius: 5px; cursor: pointer;">
+            create +</div>
+
+            <div style="padding: 10px 0px; display: flex; justify-content: center; align-items: center;">
+              <div style="width:40%;  border-radius: 12px; background-color: rgb(41, 41, 41); display: flex; align-items: center;">
+                  <ion-input [(ngModel)]="keyword" placeholder="Search"
+                      style="color: #FFFFFF; --padding-start: 10px;"></ion-input>
+                      <ion-icon *ngIf="keyword" (click)="clear()" name="close-outline" style="padding-right: 10px; font-size: 20px; cursor:pointer; opacity: 0.6;color: white;"></ion-icon>
+              </div>
+          </div>
+
+        </div>
+
+        <div style="margin-bottom: 100px ;">
+          <div
+            style="width: 100%; display:flex; padding: 32px 10px 24px 10px; font-size: 12px; border-bottom: 1.5px solid black">
+            <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Poster</div>
+            <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Name</div>
+            <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Description</div>
+            <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Duration</div>
+            <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Price</div>
+            <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Theme</div>
+            <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Start Date</div>
+            <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              End Date</div>
+            <div style="width: 5%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Action</div>
+          </div>
+
+          <div style="padding: 24px 10px 0px 10px; display: flex; width: 100%; font-size:12px; "
+            *ngFor="let x of movies  | paginate: { itemsPerPage: 5, currentPage: p }; ">
+            <div style="width: 15%;display: flex; justify-content: center; align-items: center; text-align: center;">
+              <img src="{{x.imageurl || 'https://media.moddb.com/images/downloads/1/103/102311/background.png'}}"
+                style="width: 100px; height: 100px; object-fit: contain;" />
+            </div>
+
+            <div style="width: 10%; text-align: center; overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 8;
+            line-clamp: 8; 
+            white-space: normal;
+            word-wrap: break-word;display: flex; justify-content:center; align-items:center;">
+              {{x.name}}</div>
+
+
+            <div style="width: 15%; text-overflow: ellipsis; overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 8;
+            line-clamp: 8; 
+            white-space: normal;
+            word-wrap: break-word; text-align: center;
+            display: flex; justify-content:center; align-items:center;">
+              {{x.description}}</div>
+
+            <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.duration}}</div>
+            <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.price | currency : "RM "}}</div>
+            <div
+              style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center; flex-direction: column;">
+              <div *ngFor="let y of x.theme">{{y}}</div>
+            </div>
+            <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.startdate}}</div>
+            <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.enddate}}</div>
+            <div style="width: 5%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              <ion-icon (click)="edit(x.mid)"
+                style="display: flex; justify-content: center; align-items: center; font-size: 16px; cursor: pointer;"
+                name="settings"></ion-icon>
+            </div>
+          </div>
+
+        </div>
+
+        <div
+          style="width: 100%; display: flex; align-items: flex-end; justify-content: flex-end; font-size: 13px; padding: 0 20px;">
+          <pagination-controls (pageChange)="p = $event;"></pagination-controls>
+        </div>
+
+      </div>
+
+      <div *ngIf="tab == 'showing'" style="background: #f5f5f5; width: 100%; height: 100%; position: relative;">
+
+        <div>
+
+          <div (click)="changetab('default')" style="position: absolute; top:10px; left:10px; cursor:pointer">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+
+          <div (click)="calendar()"
+          style="position: absolute; display: flex; align-items: center; padding: 5px 10px; right: 15px; top: 15px; background: rgb(0, 119, 255); color: #FFFFFF; border-radius: 5px; cursor: pointer;">
+          Sort by Calendar<ion-icon style="margin-left: 10px;" name="calendar-clear-outline"></ion-icon> </div>
+
+
+        </div>
+
+        <div style="margin-bottom: 100px ;">
+          <div
+
+            style="width: 100%; display:flex; padding: 70px 10px 24px 10px; font-size: 12px; border-bottom: 1.5px solid black">
+            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Movie</div>
+            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Hall</div>
+            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Start</div>
+            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              End</div>
+              <!-- <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Action</div> -->
+
+          </div>
+
+          <div *ngIf="!selecteddate">
+          <div style="padding: 24px 10px 0px 10px; display: flex; width: 100%; font-size:12px; "
+            *ngFor="let x of shows  | paginate: { itemsPerPage: 15, currentPage: p }; ">
+            <!-- <div style="width: 15%;display: flex; justify-content: center; align-items: center; text-align: center;">
+              <img src="{{x.imageurl || 'https://media.moddb.com/images/downloads/1/103/102311/background.png'}}"
+                style="width: 100px; height: 100px; object-fit: contain;" />
+            </div> -->
+
+            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.moviename}}</div>
+            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.hall}}</div>
+            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.start  | date : 'MMM d, y, h:mm a'}}</div>
+            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.end  | date : 'MMM d, y, h:mm a'}}</div>
+
+            <!-- <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              <ion-icon (click)="editshowing(x.sid)"
+                style="display: flex; justify-content: center; align-items: center; font-size: 16px; cursor: pointer;"
+                name="settings"></ion-icon>
+            </div> -->
+          </div>
+
+        </div>
+
+
+        <div *ngIf="selecteddate">
+          <div style="padding: 24px 10px 0px 10px; display: flex; width: 100%; font-size:12px; "
+            *ngFor="let x of selecteddateshow  | paginate: { itemsPerPage: 15, currentPage: p }; ">
+            <!-- <div style="width: 15%;display: flex; justify-content: center; align-items: center; text-align: center;">
+              <img src="{{x.imageurl || 'https://media.moddb.com/images/downloads/1/103/102311/background.png'}}"
+                style="width: 100px; height: 100px; object-fit: contain;" />
+            </div> -->
+
+            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.moviename}}</div>
+            <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.hall}}</div>
+            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.start  | date : 'MMM d, y, h:mm a'}}</div>
+            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.end  | date : 'MMM d, y, h:mm a'}}</div>
+
+            <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              <ion-icon (click)="editshowing(x.sid)"
+                style="display: flex; justify-content: center; align-items: center; font-size: 16px; cursor: pointer;"
+                name="settings"></ion-icon>
+            </div>
+          </div>
+
+          <div (click)="backfromselecteddate()" *ngIf="selecteddate" style="cursor: pointer; width:100%; display: flex; 
+          justify-content: center; align-items: center; margin-top: 50px; ">
+            <div style="width:90%; display:flex; justify-content:center; padding: 8px 0; border: 1px solid white; background-color: black; color: white; border-radius:8px ;">Back</div></div>
+
+        </div>
+
+        </div>
+
+        <div
+          style="width: 100%; display: flex; align-items: flex-end; justify-content: flex-end; font-size: 13px; padding: 0 20px;">
+          <pagination-controls (pageChange)="p = $event;"></pagination-controls>
+        </div>
+
+
+      </div>
+
+      <div *ngIf="tab == 'booking'" style="background: #f5f5f5; width: 100%; height: 100%; position: relative;">
+
+        <div>
+
+          <div (click)="changetab('default')" style="position: absolute; top:10px; left:10px; cursor:pointer">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <!-- <div (click)="callmodal('createmovie')"
+            style="position: absolute; padding: 5px 10px; right: 15px; top: 15px; background: rgb(0, 119, 255); color: #FFFFFF; border-radius: 5px; cursor: pointer;">
+            create +</div> -->
+
+        </div>
+
+        <div style="margin-bottom: 100px ;">
+          <div
+            style="width: 100%; display:flex; padding: 70px 10px 24px 10px; font-size: 12px; border-bottom: 1.5px solid black">
+            <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              User</div>
+            <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Movie</div>
+            <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Hall</div>
+            <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Date</div>
+            <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Start</div>
+            <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              End</div>
+            <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Seat</div>
+            <!-- <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              End Date</div>
+            <div style="width: 5%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              Action</div> -->
+          </div>
+
+          <div style="padding: 24px 10px 0px 10px; display: flex; width: 100%; font-size:12px; "
+            *ngFor="let x of booking  | paginate: { itemsPerPage: 15, currentPage: p }; ">
+              <!-- <div style="width: 15%;display: flex; justify-content: center; align-items: center; text-align: center;">
+                <img src="{{x.imageurl || 'https://media.moddb.com/images/downloads/1/103/102311/background.png'}}"
+                  style="width: 100px; height: 100px; object-fit: contain;" />
+              </div> -->
+
+            <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.name}}</div>
+            <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.moviename}}</div>
+            <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.hall}}</div>
+            <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.start | date : 'longDate'}}</div>
+              <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+                {{x.start | date : 'shortTime'}}</div>
+                <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+                  {{x.end | date : 'shortTime'}}</div>
+            <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.seat}}</div>
+            <!-- <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              {{x.enddate}}</div>
+            <div style="width: 5%; display: flex; justify-content: center; align-items: center; text-align: center;">
+              <ion-icon (click)="edit(x.mid)"
+                style="display: flex; justify-content: center; align-items: center; font-size: 16px; cursor: pointer;"
+                name="settings"></ion-icon>
+            </div> -->
+          </div>
+
+        </div>
+
+        <div
+          style="width: 100%; display: flex; align-items: flex-end; justify-content: flex-end; font-size: 13px; padding: 0 20px;">
+          <pagination-controls (pageChange)="p = $event;"></pagination-controls>
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+
+</ion-content>

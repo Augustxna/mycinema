@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Book Summary</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="padding: 24px 24px;">
+    <div *ngFor="let x of summary" style="padding: 12px; border: 1px solid black; border-radius: 10px; margin-bottom: 12px">
+    <!-- <div style="display: flex; justify-content:space-around; align-items: left; padding: 3px 0px;"><div style="width: 45%; text-align: left;">Order by</div><div style="width: 10%;  text-align: center;">:</div><div style="width: 45%;  text-align: left;">{{x.name}}</div></div> -->
+    <div style="display: flex; justify-content:space-around; align-items: left; padding: 3px 0px;"><div style="width: 45%; text-align: left;">Movie</div>
+    <div style="width: 10%; text-align: center;">:</div>
+    <div style="width: 45%; text-align: left;">{{x.moviename}}</div></div>
+    <div style="display: flex; justify-content:space-around; align-items: center; padding: 3px 0px;"><div style="width: 45%; text-align: left;">Hall</div><div style="width: 10%;  text-align: center;">:</div><div style="width: 45%;  text-align: left;">{{x.hall}}</div></div>
+    <div style="display: flex; justify-content:space-around; align-items: center; padding: 3px 0px;"><div style="width: 45%; text-align: left;">Date</div><div style="width: 10%;  text-align: center;">:</div><div style="width: 45%;  text-align: left;">{{x.start | date: "dd MMM yyyy"}}</div></div>
+    <div style="display: flex; justify-content:space-around; align-items: center; padding: 3px 0px;">
+      <div style="width: 45%; text-align: left;">Time</div>
+      <div style="width: 10%; text-align: center;">:</div>
+  
+      <div style="width: 45%; text-align: left; display: flex;">
+      <div>{{x.start | date: "shortTime"}}</div>
+      <div>&nbsp;-&nbsp;</div>
+      <div>{{x.end | date: "shortTime"}}</div>
+    </div>
+    </div>
+    <div style="display: flex; justify-content:space-around; align-items: center; padding: 3px 0px;"><div style="width: 45%; text-align: left;">Price</div><div style="width: 10%; text-align: center;">:</div><div style="width: 45%; text-align: left;">{{x.priceperticket * x.seat.length | currency : 'RM '}}</div></div>
+    <div style="display: flex; justify-content:space-around; align-items: center; padding: 3px 0px;"><div style="width: 45%; text-align: left;">Seat</div><div style="width: 10%; text-align: center;">:</div><div style="width: 45%; text-align: left;font-size: 30px; font-weight: 700;">{{x.seat}}</div></div>
+  </div>
+  </div>
+
+</ion-content>

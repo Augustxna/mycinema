@@ -1,0 +1,103 @@
+<ion-content>
+  <div style="padding: 32px;">
+
+    <div style="display: flex; justify-content:space-between;border-bottom: 1px solid black; padding-bottom: 24px;">
+      <div style="display: flex; align-items: center; ">Create Show</div>
+      <ion-icon (click)="closemodal()" name="close-outline" style="font-size: 18px; cursor:pointer;"></ion-icon>
+    </div>
+
+
+    <div style="padding-top: 24px; padding-bottom: 12px;">
+
+      <div>
+        
+      </div>
+
+      <!-- <div style="padding-bottom: 20px;">
+        <div style="padding-bottom: 5px; font-size: 14px;">Name</div>
+        <div id="1" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 14px;">
+          <ion-input style="--padding-start:10px;" type="text" [(ngModel)]="movie.name" (ionBlur)="blur($event, 1)" (ionFocus)="focus($event, 1)"
+            placeholder="Enter Your Name"></ion-input>
+        </div>
+      </div>
+
+      <div style="padding-bottom: 20px;">
+        <div style="padding-bottom: 5px;font-size: 14px;">Description</div>
+        <div id="2" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 12px;">
+          <ion-textarea style="--padding-start:10px; font-size: 12px; --padding-end:10px; --padding-top:5px; --padding-bottom:5px; overflow: auto;" [(ngModel)]="movie.description" row="6" (ionBlur)="blur($event, 2)"
+            (ionFocus)="focus($event, 2)" rows="6" maxlength="600" placeholder="Enter Your Name"></ion-textarea>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between;">
+
+        <div style="padding-bottom: 20px; width: 48%;">
+          <div style="padding-bottom: 5px;font-size: 14px;">Duration (min)</div>
+          <div id="3" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 14px;">
+            <ion-input style="--padding-start:10px;" type="number" [(ngModel)]="movie.duration" (ionBlur)="blur($event, 3)"
+              (ionFocus)="focus($event, 3)" placeholder="Enter Duration"></ion-input>
+          </div>
+        </div>
+
+        <div style="padding-bottom: 20px; width: 48%;">
+          <div style="padding-bottom: 5px;font-size: 14px;">Price</div>
+          <div id="4" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 14px;">
+            <ion-input style="--padding-start:10px;" type="number" [(ngModel)]="movie.price" (ionBlur)="blur($event, 4)" (ionFocus)="focus($event, 4)"
+              placeholder="Enter Price"></ion-input>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding-bottom: 20px;">
+        <div style="padding-bottom: 5px;font-size: 14px;">Theme</div>
+        <ion-list style="width: 48%;">
+          <ion-item>
+            <ion-select [(ngModel)]="movie.theme" placeholder="Select Theme" [multiple]="true">
+              <ion-select-option *ngFor="let x of themes" value="{{x}}">{{x}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <div style="width: 100%; display:flex; justify-content:space-between;">
+
+        <div style="padding-bottom: 20px; width: 48%;">
+          <div style="padding-bottom: 5px;font-size: 14px;">Start Date</div>
+          <div id="5" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 14px;">
+            <ion-input style="--padding-start:10px;" type="date" [(ngModel)]="movie.startdate" (ionBlur)="blur($event, 5)"
+              (ionFocus)="focus($event, 5)" placeholder=""></ion-input>
+          </div>
+        </div>
+
+        <div style="padding-bottom: 20px; width: 48%;">
+          <div style="padding-bottom: 5px;font-size: 14px;">End Date</div>
+          <div id="6" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 14px;">
+            <ion-input style="--padding-start:10px;" type="date" [(ngModel)]="movie.enddate" (ionBlur)="blur($event, 6)" (ionFocus)="focus($event, 6)"
+              placeholder=""></ion-input>
+          </div>
+        </div>
+      </div>
+
+      
+
+      <div style="padding-bottom: 20px;">
+        <div style="padding-bottom: 5px; font-size: 14px;">Image</div>
+        <div id="7" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 14px;">
+          <ion-input style="--padding-start:10px;" type="text" [(ngModel)]="movie.imageurl" (ionBlur)="blur($event, 7)" (ionFocus)="focus($event, 7)"
+            placeholder="Place URL"></ion-input>
+        </div>
+      </div>
+
+      <img *ngIf="movie.imageurl" src="{{movie.imageurl}}" style="width: 120px; height:200px; object-fit: cover;" /> -->
+
+
+    </div>
+
+    <div style="border-top: 1px solid black; display: flex; justify-content: center; align-items: center;">
+      <div (click)="createmovie()" style="padding-top: 12px; cursor: pointer;">Create</div>
+    </div>
+
+
+
+  </div>
+</ion-content>

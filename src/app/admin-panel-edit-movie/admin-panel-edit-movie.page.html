@@ -1,0 +1,195 @@
+<ion-content>
+
+  <div style="padding: 32px;">
+
+    
+
+    <div style=" display: flex; justify-content:space-between;border-bottom: 1px solid black; padding-bottom: 24px;">
+
+      <div style="display: flex; justify-content:flex-start">
+      <div (click)="changetab('editmovie')"
+      [ngStyle]="{'background-color': tab == 'editmovie' ? 'black' : 'white' , 'color' : tab == 'editmovie' ? 'white' : 'black'}"
+       style="padding:10px; cursor: pointer; display: flex; align-items: center; border-radius: 10px;">Edit Movie</div>
+      <div (click)="changetab('createshow')" 
+      [ngStyle]="{'background-color': tab == 'createshow' ? 'black' : 'white' , 'color' : tab == 'createshow' ? 'white' : 'black'}" 
+      style="padding:10px; cursor: pointer; display: flex; align-items: center; border-radius: 10px;">Create Show</div>
+      </div>
+
+      <ion-icon (click)="closemodal()" name="close-outline" style="font-size: 18px; cursor:pointer;"></ion-icon>
+    </div>
+
+    <div *ngIf="tab == 'editmovie'">
+
+    <div style="padding-top: 24px; padding-bottom: 12px;">
+
+      <div style="padding-bottom: 20px;">
+        <div style="padding-bottom: 5px; font-size: 14px;">Name</div>
+        <div id="1" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 14px;">
+          <ion-input style="--padding-start:10px;" type="text" [(ngModel)]="movie.name" (ionBlur)="blur($event, 1)" (ionFocus)="focus($event, 1)"
+            placeholder="Enter Your Name"></ion-input>
+        </div>
+      </div>
+
+      <div style="padding-bottom: 20px;">
+        <div style="padding-bottom: 5px;font-size: 14px;">Description</div>
+        <div id="2" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 12px; padding: 0; overflow: auto;" >
+          <ion-textarea style="--padding-start:10px; font-size: 12px; --padding-end:10px; --padding-top:5px; --padding-bottom:5px; overflow: auto;" 
+          [(ngModel)]="movie.description" rows="6" maxlength="600" (ionBlur)="blur($event, 2)"
+            (ionFocus)="focus($event, 2)" placeholder="Enter Your Name"></ion-textarea>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between;">
+
+        <div style="padding-bottom: 20px; width: 48%;">
+          <div style="padding-bottom: 5px;font-size: 14px;">Duration (min)</div>
+          <div id="3" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 14px;">
+            <ion-input style="--padding-start:10px;" type="number" [(ngModel)]="movie.duration" (ionBlur)="blur($event, 3)"
+              (ionFocus)="focus($event, 3)" placeholder="Enter Duration"></ion-input>
+          </div>
+        </div>
+
+        <div style="padding-bottom: 20px; width: 48%;">
+          <div style="padding-bottom: 5px;font-size: 14px;">Price</div>
+          <div id="4" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 14px;">
+            <ion-input style="--padding-start:10px;" type="number" [(ngModel)]="movie.price" (ionBlur)="blur($event, 4)" (ionFocus)="focus($event, 4)"
+              placeholder="Enter Price"></ion-input>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding-bottom: 20px;">
+        <div style="padding-bottom: 5px;font-size: 14px;">Theme</div>
+        <ion-list style="width: 48%;">
+            <div style="border: 1px solid #DCDCDC; border-radius: 10px;">
+            <ion-label no-margin no-padding style="display: none;">Select Theme</ion-label>
+            <ion-select style="--width: 100%;" *ngIf="themes.length > 0" [(ngModel)]="movie.theme" placeholder="Select Theme" [multiple]="true">
+              <ion-select-option *ngFor="let x of themes" value="{{x}}">{{x}}</ion-select-option>
+            </ion-select>
+          </div>
+        </ion-list>
+      </div>
+
+      <div style="width: 100%; display:flex; justify-content:space-between;">
+
+        <div style="padding-bottom: 20px; width: 48%;">
+          <div style="padding-bottom: 5px;font-size: 14px;">Start Date</div>
+          <div id="5" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 14px;">
+            <ion-input style="--padding-start:10px;" type="date" [(ngModel)]="movie.startdate" (ionBlur)="blur($event, 5)"
+              (ionFocus)="focus($event, 5)" placeholder=""></ion-input>
+          </div>
+        </div>
+
+        <div style="padding-bottom: 20px; width: 48%;">
+          <div style="padding-bottom: 5px;font-size: 14px;">End Date</div>
+          <div id="6" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 14px;">
+            <ion-input style="--padding-start:10px;" type="date" [(ngModel)]="movie.enddate" (ionBlur)="blur($event, 6)" (ionFocus)="focus($event, 6)"
+              placeholder=""></ion-input>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding-bottom: 20px;">
+        <div style="padding-bottom: 5px; font-size: 14px;">Image</div>
+        <div id="7" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 14px;">
+          <ion-input style="--padding-start:10px;" type="text" [(ngModel)]="movie.imageurl" (ionBlur)="blur($event, 7)" (ionFocus)="focus($event, 7)"
+            placeholder="Place URL"></ion-input>
+        </div>
+      </div>
+
+      <!-- <label for="filessquare" class="btn">
+        <div class="profile_edit"
+          style="cursor: pointer; width: calc(40px - 5px); height: 35px; border: 1px solid #eeeeee; border-radius: 3px; display: flex; align-items: center; justify-content: center; margin-right: 5px;">
+          <ion-icon style="font-size: 18px;" name="create-outline"></ion-icon>
+        </div>
+      </label>
+
+      <input style="display: none" id="filessquare" accept="image/*" type="file"
+        (change)="fileChange($event)"> -->
+
+      <img *ngIf="movie.imageurl" src="{{movie.imageurl}}" style="width: 120px; height:200px; object-fit: cover;" />
+    </div>
+
+    <div style="border-top: 1px solid black; display: flex; justify-content: center; align-items: center;">
+      <div (click)="editmovie()" style="padding-top: 12px; cursor: pointer;">Edit</div>
+    </div>
+  </div>
+
+  <div *ngIf="tab == 'createshow'  " style="width: 100%;">
+
+    <div style="padding: 24px 0; ">Choose Date & Time</div>
+
+        <!-- <div style="padding-bottom: 20px; width: 48%;">
+          <div style="padding-bottom: 5px;font-size: 14px;">Date</div>
+          <div id="5" style="border-radius:10px;border: 1px solid #DCDCDC; font-size: 14px;">
+            <ion-input style="--padding-start:10px;" type="date" (ionBlur)="blur($event, 5)"
+              (ionFocus)="focus($event, 5)" placeholder=""></ion-input>
+          </div>
+        </div> -->
+
+      <!-- <ion-icon (click)="showcalendar = !showcalendar" name="calendar-clear-outline"></ion-icon> -->
+
+        <div style="width: max-content; height: max-content; border: 1px solid black; padding: 10px; 
+        display:flex; justify-content:center; border-radius:10px; margin-bottom: 10px;" 
+        (ionChange)="checkhall()" *ngIf="showcalendar == true">
+          <ion-datetime [(ngModel)]="datetime"
+            value="2022-04-21T00:00:00"
+            min="1922-03-01T00:00:00"
+            max="2122-05-31T23:59:59"
+          ></ion-datetime>
+
+          <!-- <div (click)="checkhall()" *ngIf="datetime"  style="padding: 12px; border:1px solid black; width: 200px; display: flex; justify-content: center; align-items: center; cursor: pointer;">Check Hall</div> -->
+
+        </div>
+
+        <div *ngIf="checkhalltab == 1" style="display: flex; flex-direction: column; padding-bottom: 12px;">
+
+          <div style="padding: 32px 0 16px 0; ">Select Hall</div>
+
+          <div style="display: flex; justify-content: space-around;">
+
+        <div *ngIf="halltab1 == 0" [ngStyle]="{'background-color': hall2tab1 == 1 ? '#3880FF' : '', 'color' : hall2tab1 == 1 ? '#FFFFFF' : '#000000'}"
+         id="H1" (click)="gethall('H1')" style="padding: 10px; cursor: pointer; color: black; border: 1px solid black; border-radius: 5px;">H1</div>
+        <div *ngIf="halltab1 == 1" style="padding: 10px;  color: rgb(177, 177, 177);">H1</div>
+
+        <div *ngIf="halltab2 == 0" [ngStyle]="{'background-color': hall2tab2 == 1 ? '#3880FF' : '', 'color' : hall2tab2 == 1 ? '#FFFFFF' : '#000000'}"
+         id="H2" (click)="gethall('H2')" style="padding: 10px; cursor: pointer; color: black; border: 1px solid black; border-radius: 5px;">H2</div>
+        <div *ngIf="halltab2 == 1" style="padding: 10px;  color: rgb(177, 177, 177);">H2</div>
+
+        <div *ngIf="halltab3 == 0" [ngStyle]="{'background-color': hall2tab3 == 1 ? '#3880FF' : '', 'color' : hall2tab3 == 1 ? '#FFFFFF' : '#000000'}"
+         id="H3" (click)="gethall('H3')" style="padding: 10px; cursor: pointer; color: black; border: 1px solid black;border-radius: 5px;">H3</div>
+        <div *ngIf="halltab3 == 1" style="padding: 10px; color: rgb(177, 177, 177);">H3</div>
+
+        <div *ngIf="halltab4 == 0" [ngStyle]="{'background-color': hall2tab4 == 1 ? '#3880FF' : '', 'color' : hall2tab4 == 1 ? '#FFFFFF' : '#000000'}"
+         id="H4" (click)="gethall('H4')" style="padding: 10px; cursor: pointer; color: black; border: 1px solid black;border-radius: 5px;">H4</div>
+        <div *ngIf="halltab4 == 1" style="padding: 10px;  color: rgb(177, 177, 177);">H4</div>
+
+        <div *ngIf="halltab5 == 0" [ngStyle]="{'background-color': hall2tab5 == 1 ? '#3880FF' : '', 'color' : hall2tab5 == 1 ? '#FFFFFF' : '#000000'}"
+         id="H5" (click)="gethall('H5')" style="padding: 10px; cursor: pointer; color: black; border: 1px solid black;border-radius: 5px;">H5</div>
+        <div *ngIf="halltab5 == 1" style="padding: 10px;  color: rgb(177, 177, 177);">H5</div>
+
+        <div *ngIf="halltab6 == 0" [ngStyle]="{'background-color': hall2tab6 == 1 ? '#3880FF' : '', 'color' : hall2tab6 == 1 ? '#FFFFFF' : '#000000'}"
+         id="H6" (click)="gethall('H6')" style="padding: 10px; cursor: pointer; color: black; border: 1px solid black;border-radius: 5px;">H6</div>
+        <div *ngIf="halltab6 == 1" style="padding: 10px;  color: rgb(177, 177, 177);">H6</div>
+
+        <div *ngIf="halltab7 == 0" [ngStyle]="{'background-color': hall2tab7 == 1 ? '#3880FF' : '', 'color' : hall2tab7 == 1 ? '#FFFFFF' : '#000000'}"
+         id="H7" (click)="gethall('H7')" style="padding: 10px; cursor: pointer; color: black; border: 1px solid black;border-radius: 5px;">H7</div>
+        <div *ngIf="halltab7 == 1" style="padding: 10px;  color: rgb(177, 177, 177);">H7</div>
+      </div>
+        </div>
+
+
+
+
+        <div style="border-top: 1px solid black; display: flex; justify-content: center; align-items: center;">
+          <div (click)="createshow()" style="padding-top: 12px; cursor: pointer;">Create Show</div>
+        </div>
+
+        
+
+  </div>
+
+
+  </div>
+
+</ion-content>

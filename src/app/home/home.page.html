@@ -1,0 +1,60 @@
+<ion-content style="--background: black">
+    <div *ngIf="user.role == 'user'" style="position: relative; color: white;">
+        <div (click)="booksummary()" style="position: absolute; top: 16px; left: 20px; color: white; display: flex; align-items: center;">Book<ion-icon style="padding-left: 3px;" name="browsers-outline"></ion-icon></div>
+        <div (click)="signout()" style="position: absolute; top: 16px; right: 20px; color: white;"><ion-icon name="log-out-outline"></ion-icon></div>
+
+        <div style="padding: 48px 20px 32px 20px;">
+            <div style="padding-bottom: 10px;">
+                <div style="width:100%;  border-radius: 12px; background-color: rgb(41, 41, 41); display: flex; align-items: center;">
+                    <ion-input [(ngModel)]="keyword" placeholder="Search"
+                        style="color: #FFFFFF; --padding-start: 10px;"></ion-input>
+                        <ion-icon *ngIf="keyword" (click)="clear()" name="close-outline" style="padding-right: 10px; font-size: 20px; cursor:pointer; opacity: 0.6; color: white;"></ion-icon>
+                </div>
+            </div>
+
+            <div
+                style="display: flex; justify-content:space-between; align-items: center; overflow-x: auto; padding: 12px 0px 24px 0px;">
+                <div id="{{i}}" (click)="select(x,i)" *ngFor="let x of themes; let i = index;"
+                    [ngStyle]="{'color': i == 0 ? 'rgb(0,0,0)' : 'rgb(255,255,255)' , 'background-color' : i == 0 ? 'rgb(254, 231, 21)' : 'rgb(0, 0, 0)'}"
+                    style="border-radius: 5px; box-shadow: 0 0 4px white; padding: 10px; display: flex; justify-content: center; align-items: center; border: 1px solid lightgray; min-width: max-content; margin: 0px 5px;">
+                    {{x}} </div>
+            </div>
+
+
+            <div *ngIf="keyword"
+                style="padding: 24px 0px 24px 0px; display: flex; justify-content: space-between; flex-wrap: wrap; width: 100%;">
+                <div (click)="detail(x.mid)" *ngFor="let x of filtersearch(filtermovie)" style="width: calc((100vw - 60px) / 2);margin-bottom: 16px;">
+                    <img src="{{x.imageurl || 'https://media.moddb.com/images/downloads/1/103/102311/background.png'}}"
+                        style="border-radius: 5px; width: 100%; height:200px; object-fit:cover;" />
+                    <div style="text-align:center; padding:0 8px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    white-space: normal;
+                    word-wrap: break-word;">
+                        {{x.name}}</div>
+                </div>
+            </div>
+
+            <div *ngIf="!keyword"
+                style="padding: 24px 0px 24px 0px; display: flex; justify-content: space-between; flex-wrap: wrap; width: 100%;">
+                <div (click)="detail(x.mid)" *ngFor="let x of filtermovie" style="width: calc((100vw - 60px) / 2); margin-bottom: 16px;">
+                    <img src="{{x.imageurl || 'https://media.moddb.com/images/downloads/1/103/102311/background.png'}}"
+                        style="border-radius: 5px; width: 100%; height:200px; object-fit:cover;" />
+                    <div style="text-align: center; padding:0 8px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    white-space: normal;
+                    word-wrap: break-word;">
+                        {{x.name}}</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</ion-content>

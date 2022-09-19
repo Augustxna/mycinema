@@ -1,0 +1,100 @@
+<ion-content style="--background: black; --color:white">
+  <div style="position: relative;">
+    <div
+      style="position:fixed;top:0;left:0;height:50px;display:flex;align-items:center;z-index: 1002;width: 100vw;background:transparent;justify-content: space-between;">
+      <div
+        style='margin-left:15px;height:25px;width:25px;display:flex;justify-content: center;align-items: center;border-radius:100%;background-color: rgba(255,255,255,0.2);'>
+        <ion-icon (click)='back()' style='color:black;font-size:20px;margin-right:3px;' name="chevron-back-outline">
+        </ion-icon>
+      </div>
+    </div>
+    <div>
+      <div style="width: 100%; height: 250px; ">
+
+        <img src="{{movies.imageurl || 'https://media.moddb.com/images/downloads/1/103/102311/background.png'}}"
+          style="width: 100%; height:250px; object-fit: cover;" />
+
+      </div>
+
+      <div style="padding: 16px 12px;">
+        <div style="font-size: 22px; padding-bottom:12px;">{{movies.name}}</div>
+        <div style="display: flex;">
+          <div *ngFor="let x of movies.theme; let i = index">
+            <div
+              [ngStyle]="{'border-right': i == movies.theme.length -1 ? '' : '1px solid #FFFFFF', 'padding-left' : i == 0 ? '0' : '10px' }"
+              style=" padding-right:10px;">{{x}}</div>
+          </div>
+        </div>
+
+        <div style="font-size: 14px; padding:24px 0;">{{movies.description}}</div>
+      </div>
+    </div>
+
+
+    <div style="width: 100%;">
+      <div
+        style="width: 100%;color: white; padding: 24px 12px 0px 12px ; display:flex; flex-direction: column; align-items:center;">
+
+        <div
+          style="width: 100%; display:flex; justify-content: center; border-bottom: 1px solid white; border-top: 1px solid white; padding:5px 0; color: white;">
+          SCREEN
+        </div>
+
+        <div style="display: flex; padding: 44px 0px 10px 0px;">
+          <div style="width: 100%; display: flex; justify-content: space-between; padding: 0px 12px;"
+            *ngFor="let x of rowA; let i = index">
+            <div *ngIf="x.occupied" id="{{i}}" (click)="tab(x.seat,i)"
+              style="background-color: red; cursor:pointer;display:flex; justify-content:center; width:calc((100vw-20px) / 5); padding: 10px; border:1px solid #FFFFFF;">
+              {{x.seat}}</div>
+            <div *ngIf="!x.occupied" [ngStyle]="{'background-color': x.selected ? 'green' : 'blue'}" id="{{i}}"
+              (click)="tab(x.seat,i)"
+              style=" cursor:pointer;display:flex; justify-content:center; width:calc((100vw-20px) / 5); padding: 10px; border:1px solid #FFFFFF;">
+              {{x.seat}}</div>
+          </div>
+        </div>
+
+
+        <div style="display: flex; margin:10px 0">
+          <div style="width: 100%; display: flex; justify-content: space-between; padding: 0px 12px;"
+            *ngFor="let x of rowB; let i = index">
+            <div *ngIf="x.occupied" id="{{i+5}}" (click)="tab(x.seat,i+5)"
+              style="background-color: red; cursor:pointer;display:flex; justify-content:center; width:calc((100vw-20px) / 5); padding: 10px; border:1px solid #FFFFFF;">
+              {{x.seat}}</div>
+            <div *ngIf="!x.occupied" [ngStyle]="{'background-color': x.selected ? 'green' : 'blue'}" id="{{i+5}}"
+              (click)="tab(x.seat,i+5)"
+              style=" cursor:pointer;display:flex; justify-content:center; width:calc((100vw-20px) / 5); padding: 10px; border:1px solid #FFFFFF;">
+              {{x.seat}}</div>
+          </div>
+        </div>
+
+
+        <div style="display: flex;  margin: 10px 0">
+          <div style="width: 100%; display: flex; justify-content: space-between; padding: 0px 12px;"
+            *ngFor="let x of rowC; let i = index">
+
+            <div *ngIf="x.occupied" id="{{i+10}}" (click)="tab(x.seat,i+10)"
+              style="background-color: red; cursor:pointer;display:flex; justify-content:center; width:calc((100vw-20px) / 5); padding: 10px; border:1px solid #FFFFFF;">
+              {{x.seat}}</div>
+
+            <div *ngIf="!x.occupied" [ngStyle]="{'background-color': x.selected ? 'green' : 'blue'}" id="{{i+10}}"
+              (click)="tab(x.seat,i+10)"
+              style=" cursor:pointer;display:flex; justify-content:center; width:calc((100vw-20px) / 5); padding: 10px; border:1px solid #FFFFFF;">
+              {{x.seat}}</div>
+              
+          </div>
+        </div>
+
+
+
+
+      </div>
+
+      <div
+        style="width: 100%; display:flex; align-items:center; justify-content:center; text-align:center; padding-top: 40px ;">
+        <div (click)="checkout()"
+          style="font-weight: bolder; width: 60%; padding: 15px 0px; border-radius:10px; color: black; cursor: pointer; background-color: #FEE715FF;">
+          Check Out</div>
+      </div>
+    </div>
+  </div>
+</ion-content>

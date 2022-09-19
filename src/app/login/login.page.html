@@ -1,0 +1,52 @@
+<ion-content style="--background: black; --color:white">
+  <div
+    style="display: flex; align-items:center; justify-content: center; flex-direction:column; height: 100vh; width: 100vw;">
+
+    <div style="display: flex; flex-direction: column; justify-content:center; align-items:center;padding-bottom: 75px; color: #FEE715FF;">
+      <img style="padding:10px 0" src="assets/home-white.png"/>
+      <div>HOME CINEMA</div>
+    </div>
+
+    <div style="display: flex; flex-direction:column; justify-content: center; align-items: center;">
+
+      <div style="margin:10px">
+        <div style="padding: 10px 0px;">Email : </div>
+        <div id="1" style="display: flex; align-items: center; border:1px solid white; border-radius: 10px; width: 80vw;">
+        <ion-input style="--padding-start:10px;" (ionFocus)="focus($event, 1)" (ionBlur)="blur($event, 1)" type="text" placeholder="Enter your email" [(ngModel)]="user.email" ></ion-input>
+        </div>
+      </div>
+
+      <div style="margin:10px">
+        <div style="padding: 10px 0px;">Password: </div>
+        <div  id="2" style="display: flex; align-items: center; border:1px solid white; border-radius: 10px; width: 80vw;">
+        <ion-input style="--padding-start:10px;" [type]="eye ? 'text' : 'password' " (ionFocus)="focus($event, 2)" (ionBlur)="blur($event, 2)"  placeholder="Enter your password" [(ngModel)]="user.password"></ion-input>
+        <ion-icon (click)="eye = !eye" [name]="eye ? 'eye-outline' : 'eye-off-outline' " style="cursor: pointer; font-size: 20px; padding-right: 5px; padding-left: 5px;"></ion-icon>
+      </div>
+      </div>
+
+    </div>
+
+    <div style="width: 100%; display:flex; align-items:center; justify-content:center; text-align:center; padding-top: 40px ;">
+      <div (click)="login()" style="font-weight: bolder; width: 60%; padding: 15px 0px; border-radius:10px; color: black; cursor: pointer; background-color: #FEE715FF;">LOGIN</div>
+    </div>
+
+
+    <div style="width: 60%; display: flex; justify-content: space-between; align-items: center; padding-top: 40px;">
+      <div style="width: 30%; background-color: white; height: 1px; "></div>
+      <div>Other Login</div>
+      <div style="width: 30%; background-color: white; height: 1px; "></div>
+    </div>
+
+    <div style="padding-top: 24px; display:flex; justify-content: space-around; width: 60%;">
+      
+      <ion-icon style="font-size: 32px; color: #FEE715FF; cursor: pointer;" name="logo-facebook"></ion-icon>
+      <ion-icon style="font-size: 32px; color: #FEE715FF; cursor: pointer;" name="mail-outline"></ion-icon>
+    </div>
+
+
+    <div (click)="gotoregister()" style="margin-top:50px; cursor: pointer; text-align: center;">
+      Havent have an account?<br/>
+      Sign up now
+    </div>
+  </div>
+</ion-content>
