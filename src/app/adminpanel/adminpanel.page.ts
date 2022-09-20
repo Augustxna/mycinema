@@ -24,7 +24,7 @@ export class AdminpanelPage implements OnInit {
   booking = [] as any
 
   keyword 
-  
+
   constructor(private modal: ModalController, private nav: NavController, private route: ActivatedRoute) { }
 
   p = 1
@@ -44,6 +44,8 @@ export class AdminpanelPage implements OnInit {
       a.forEach(b =>{
         this.booking.push(b.val())
       })
+
+      console.log(this.booking)
 
       for(let i =0 ; i < this.booking.length; i++)
       {
@@ -210,11 +212,69 @@ export class AdminpanelPage implements OnInit {
       
       this.selecteddateshow = this.shows.filter(a => a['starttime'] > temp6 && a['starttime'] < temp7)
 
+      console.log(this.selecteddateshow)
+
     })
   }
 
   backfromselecteddate(){
     this.selecteddate = null
+  }
+
+  filterer(x, tab)
+  {
+    if (tab == 'movies') {
+
+      if(this.keyword)
+      {
+        console.log(x)
+        let temp = []
+        
+        temp = x ? x.filter(a => (( (a['name'] || '') + (a['description'] || '') +  (a['theme'] || '')).toLowerCase()).includes(this.keyword.toLowerCase())) : []
+        return temp
+      }
+      else{
+        return x
+      }
+  
+    }
+
+    else if(tab == 'booking')
+    {      
+      if(this.keyword)
+      {
+        console.log(x)
+        return x ? x.filter(a => (( (a['name'] || '') + (a['moviename'] || '') + (a['hall'] || '') +  (a['seat'] || '') + (a['start'] || '') + (a['end'] || '')).toLowerCase()).includes(this.keyword.toLowerCase())) : []
+      }
+      else{
+        return x
+      }
+
+    }
+
+    else if(tab == 'shows')
+    {
+      if(this.keyword)
+      {
+        console.log(x)
+        return x ? x.filter(a => (( (a['moviename'] || '') + (a['hall'] || '') +  (a['start'] || '') + (a['end'] || '')).toLowerCase()).includes(this.keyword.toLowerCase())) : []
+      }
+      else{
+        return x
+      }
+    }
+
+    else if(tab == 'selecteddateshow')
+    {
+      if(this.keyword)
+      {
+        console.log(x)
+        return x ? x.filter(a => (( (a['moviename'] || '') + (a['hall'] || '') +  (a['start'] || '') + (a['end'] || '')).toLowerCase()).includes(this.keyword.toLowerCase())) : []
+      }
+      else{
+        return x
+      }
+    }
   }
 
 

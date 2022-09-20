@@ -77,7 +77,7 @@
           </div>
 
           <div style="padding: 24px 10px 0px 10px; display: flex; width: 100%; font-size:12px; "
-            *ngFor="let x of movies  | paginate: { itemsPerPage: 5, currentPage: p }; ">
+            *ngFor="let x of filterer(movies, 'movies')  | paginate: { itemsPerPage: 5, currentPage: p }; ">
             <div style="width: 15%;display: flex; justify-content: center; align-items: center; text-align: center;">
               <img src="{{x.imageurl || 'https://media.moddb.com/images/downloads/1/103/102311/background.png'}}"
                 style="width: 100px; height: 100px; object-fit: contain;" />
@@ -144,7 +144,13 @@
           style="position: absolute; display: flex; align-items: center; padding: 5px 10px; right: 15px; top: 15px; background: rgb(0, 119, 255); color: #FFFFFF; border-radius: 5px; cursor: pointer;">
           Sort by Calendar<ion-icon style="margin-left: 10px;" name="calendar-clear-outline"></ion-icon> </div>
 
-
+          <div style="padding: 10px 0px; display: flex; justify-content: center; align-items: center;">
+            <div style="width:40%;  border-radius: 12px; background-color: rgb(41, 41, 41); display: flex; align-items: center;">
+                <ion-input [(ngModel)]="keyword" placeholder="Search"
+                    style="color: #FFFFFF; --padding-start: 10px;"></ion-input>
+                    <ion-icon *ngIf="keyword" (click)="clear()" name="close-outline" style="padding-right: 10px; font-size: 20px; cursor:pointer; opacity: 0.6;color: white;"></ion-icon>
+            </div>
+        </div>
         </div>
 
         <div style="margin-bottom: 100px ;">
@@ -166,20 +172,27 @@
 
           <div *ngIf="!selecteddate">
           <div style="padding: 24px 10px 0px 10px; display: flex; width: 100%; font-size:12px; "
-            *ngFor="let x of shows  | paginate: { itemsPerPage: 15, currentPage: p }; ">
+            *ngFor="let x of filterer(shows , 'shows')  | paginate: { itemsPerPage: 15, currentPage: p }; ">
             <!-- <div style="width: 15%;display: flex; justify-content: center; align-items: center; text-align: center;">
               <img src="{{x.imageurl || 'https://media.moddb.com/images/downloads/1/103/102311/background.png'}}"
                 style="width: 100px; height: 100px; object-fit: contain;" />
             </div> -->
 
-            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
+            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 8;
+            line-clamp: 8; 
+            white-space: normal;
+            word-wrap: break-word;">
               {{x.moviename}}</div>
             <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
               {{x.hall}}</div>
             <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
-              {{x.start  | date : 'MMM d, y, h:mm a'}}</div>
+              {{x.start  | date : 'MMM d y HH:mm'}}</div>
             <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
-              {{x.end  | date : 'MMM d, y, h:mm a'}}</div>
+              {{x.end  | date : 'MMM d y HH:mm'}}</div>
 
             <!-- <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
               <ion-icon (click)="editshowing(x.sid)"
@@ -193,20 +206,27 @@
 
         <div *ngIf="selecteddate">
           <div style="padding: 24px 10px 0px 10px; display: flex; width: 100%; font-size:12px; "
-            *ngFor="let x of selecteddateshow  | paginate: { itemsPerPage: 15, currentPage: p }; ">
+            *ngFor="let x of filterer(selecteddateshow, 'selecteddateshow')  | paginate: { itemsPerPage: 15, currentPage: p }; ">
             <!-- <div style="width: 15%;display: flex; justify-content: center; align-items: center; text-align: center;">
               <img src="{{x.imageurl || 'https://media.moddb.com/images/downloads/1/103/102311/background.png'}}"
                 style="width: 100px; height: 100px; object-fit: contain;" />
             </div> -->
 
-            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
+            <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 8;
+            line-clamp: 8; 
+            white-space: normal;
+            word-wrap: break-word;">
               {{x.moviename}}</div>
             <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
               {{x.hall}}</div>
             <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
-              {{x.start  | date : 'MMM d, y, h:mm a'}}</div>
+              {{x.start  | date : 'MMM d y HH:mm'}}</div>
             <div style="width: 25%; display: flex; justify-content: center; align-items: center; text-align: center;">
-              {{x.end  | date : 'MMM d, y, h:mm a'}}</div>
+              {{x.end  | date : 'MMM d y HH:mm'}}</div>
 
             <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
               <ion-icon (click)="editshowing(x.sid)"
@@ -238,6 +258,13 @@
           <div (click)="changetab('default')" style="position: absolute; top:10px; left:10px; cursor:pointer">
             <ion-icon name="arrow-back-outline"></ion-icon>
           </div>
+          <div style="padding: 10px 0px; display: flex; justify-content: center; align-items: center;">
+            <div style="width:40%;  border-radius: 12px; background-color: rgb(41, 41, 41); display: flex; align-items: center;">
+                <ion-input [(ngModel)]="keyword" placeholder="Search"
+                    style="color: #FFFFFF; --padding-start: 10px;"></ion-input>
+                    <ion-icon *ngIf="keyword" (click)="clear()" name="close-outline" style="padding-right: 10px; font-size: 20px; cursor:pointer; opacity: 0.6;color: white;"></ion-icon>
+            </div>
+        </div>
           <!-- <div (click)="callmodal('createmovie')"
             style="position: absolute; padding: 5px 10px; right: 15px; top: 15px; background: rgb(0, 119, 255); color: #FFFFFF; border-radius: 5px; cursor: pointer;">
             create +</div> -->
@@ -268,7 +295,7 @@
           </div>
 
           <div style="padding: 24px 10px 0px 10px; display: flex; width: 100%; font-size:12px; "
-            *ngFor="let x of booking  | paginate: { itemsPerPage: 15, currentPage: p }; ">
+            *ngFor="let x of filterer(booking, 'booking')  | paginate: { itemsPerPage: 15, currentPage: p }; ">
               <!-- <div style="width: 15%;display: flex; justify-content: center; align-items: center; text-align: center;">
                 <img src="{{x.imageurl || 'https://media.moddb.com/images/downloads/1/103/102311/background.png'}}"
                   style="width: 100px; height: 100px; object-fit: contain;" />
@@ -276,16 +303,23 @@
 
             <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
               {{x.name}}</div>
-            <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
+            <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 8;
+            line-clamp: 8; 
+            white-space: normal;
+            word-wrap: break-word;">
               {{x.moviename}}</div>
             <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
               {{x.hall}}</div>
             <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
-              {{x.start | date : 'longDate'}}</div>
+              {{x.start | date : 'MMM d y'}}</div>
               <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
-                {{x.start | date : 'shortTime'}}</div>
+                {{x.start | date : 'HH:mm'}}</div>
                 <div style="width: 15%; display: flex; justify-content: center; align-items: center; text-align: center;">
-                  {{x.end | date : 'shortTime'}}</div>
+                  {{x.end | date : 'HH:mm'}}</div>
             <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
               {{x.seat}}</div>
             <!-- <div style="width: 10%; display: flex; justify-content: center; align-items: center; text-align: center;">
