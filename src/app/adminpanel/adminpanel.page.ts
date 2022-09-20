@@ -277,6 +277,10 @@ export class AdminpanelPage implements OnInit {
     }
   }
 
+  clear(){
+    this.keyword = ''
+  }
+
 
 
 }

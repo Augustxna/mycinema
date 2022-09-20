@@ -10,11 +10,7 @@ import { NavController } from '@ionic/angular';
 })
 export class AuthGuard implements CanLoad {
 
-  constructor(
-    private nav : NavController
-  ){
-
-  }
+  constructor(private nav : NavController){}
 
   canLoad(
     route: Route,
